@@ -13,10 +13,10 @@ venv/
 .env/
 env/
 
-# Trained models (large binary files)
-models/*.h5
-models/*.pkl
-models/*.keras
+# Trained models — uncomment to ignore if files are too large
+# models/*.h5
+# models/*.pkl
+# models/*.keras
 
 # Plots (auto-generated)
 plots/

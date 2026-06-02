@@ -150,9 +150,14 @@ def build_inference_models(model: Model):
 def train_model(model: Model,
                 x_train, y_train, x_val, y_val,
                 batch_size: int = 64, epochs: int = 30,
-                model_path: str = "models/seq2seq_model.h5"):
+                model_path: str = None):
     """Task 5: Train Article → Summary mapping."""
     import os
+    if model_path is None:
+        model_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "models", "seq2seq_model.h5"
+        )
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
 
     callbacks = [

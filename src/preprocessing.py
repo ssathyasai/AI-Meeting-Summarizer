@@ -46,7 +46,7 @@ def clean_summary(summary: str) -> str:
 # ─────────────────────────────────────────────
 
 def preprocess(df: pd.DataFrame, fit: bool = True,
-               tokenizer_path: str = "models/tokenizers.pkl"):
+               tokenizer_path: str = None):
     """
     Clean, tokenize and pad text & summaries.
 
@@ -65,6 +65,12 @@ def preprocess(df: pd.DataFrame, fit: bool = True,
     df.reset_index(drop=True, inplace=True)
 
     # ── Tokenizers ──────────────────────────────────────
+    if tokenizer_path is None:
+        tokenizer_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "models", "tokenizers.pkl"
+        )
+
     if fit:
         text_tok = Tokenizer(num_words=VOCAB_SIZE_TEXT, oov_token="<OOV>")
         text_tok.fit_on_texts(df["cleaned_text"])
